@@ -1,0 +1,94 @@
+[
+  {
+    "id": "overview",
+    "title": "What is pneumonia?",
+    "body": "Pneumonia is an infection in your lungs caused by bacteria, viruses or fungi. Pneumonia causes your lung tissue to swell (inflammation) and can cause fluid or pus in your lungs. Bacterial pneumonia is usually more severe than viral pneumonia, which often resolves on its own. Pneumonia can affect one or both lungs. Pneumonia in both of your lungs is called bilateral or double pneumonia.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "types",
+    "title": "What are the types of pneumonia?",
+    "body": "You can categorize pneumonia by which pathogen (virus, bacteria or fungi) caused it and how you got it — community-acquired, hospital-acquired or ventilator-associated pneumonia.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "causes",
+    "title": "Causes of Pneumonia",
+    "body": "Viral pneumonia is typically the result of infection of a respiratory virus, such as influenza or SARS-CoV-2. It is spread through the transmission of respiratory droplets from sneezes and coughs.\n\nBacterial pneumonia is commonly caused by Streptococcus pneumoniae. In some cases, bacterial infection can result from a viral infection, because the weakened respiratory system has allowed unhealthy amounts of bacteria to thrive. Bacteria are the most common cause in adults and viruses are the most common cause in school-aged children.",
+    "image": "assets/images/..."
+  },
+
+
+  {
+    "id": "difference",
+    "title": "What’s the difference between viral and bacterial pneumonia?",
+    "body": "While all pneumonia is inflammation caused by an infection in your lungs, you may have different symptoms depending on whether the root cause is a virus, bacteria or fungi.\n\nBacterial pneumonia tends to be more common and more severe than viral pneumonia. It’s more likely to require a hospital stay. Providers treat bacterial pneumonia with antibiotics. Viral pneumonia causes flu-like symptoms and is more likely to resolve on its own. You usually don’t need specific treatment for viral pneumonia.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "bact_symp",
+    "title": "Symptoms of bacterial pneumonia",
+    "body": "Symptoms of bacterial pneumonia can develop gradually or suddenly. Symptoms include:\n\nHigh fever (up to 105 F or 40.55 C).\nCough with yellow, green or bloody mucus.\nTiredness (fatigue).\nRapid breathing.\nShortness of breath.\nRapid heart rate.\nSweating or chills.\nChest pain and/or abdominal pain, especially with coughing or deep breathing.\nLoss of appetite.\nBluish skin, lips or nails (cyanosis).\nConfusion or altered mental state.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "viral_symp",
+    "title": "Symptoms of viral pneumonia",
+    "body": "Symptoms of viral pneumonia usually develop over several days. You might have symptoms similar to bacterial pneumonia or you might additionally have:\n\nDry cough.\nHeadache.\nMuscle pain.\nExtreme tiredness or weakness.",
+    "image": "assets/images/..."
+  },
+
+
+  {
+    "id": "telltale",
+    "title": "How can I tell if I have pneumonia versus the common cold or the flu?",
+    "body": "It can be difficult to tell the difference between the symptoms of a cold, the flu and pneumonia, and only a healthcare provider can diagnose you. As pneumonia can be life-threatening, it’s important to seek medical attention for serious symptoms that could be signs of pneumonia, such as:\n\nCongestion or chest pain.\nDifficulty breathing.\nA fever of 102 degrees Fahrenheit (38.88 degrees Celsius) or higher.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "young_symp",
+    "title": "Symptoms of pneumonia in young children",
+    "body": "Babies and newborns may not show any symptoms of pneumonia or their symptoms may be different from adults, including:\n\nFever, chills, general discomfort, sweating/flushed skin.\nCough.\nDifficulty breathing or rapid breathing (tachypnea).\nLoss of appetite.\nVomiting.\nLack of energy.\nRestlessness or fussiness.Signs you can look for in babies and young children include:\n\nGrunting sound with breathing or noisy breathing.\nA decreased amount of pee or diapers that are less wet.\nPale skin.\nLimpness.\nCrying more than usual.\nDifficulty feeding.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "risk",
+    "title": "Who is most at risk of getting pneumonia?",
+    "body": "You’re at an increased risk of pneumonia if you:\n\nAre over the age of 65 and or under the age of 2.\nAre living with a lung or heart condition. Examples include cystic fibrosis, asthma, chronic obstructive pulmonary disease, emphysema, pulmonary fibrosis or sarcoidosis.\nAre living with a neurological condition that makes swallowing difficult. Conditions like dementia, Parkinson’s disease and stroke increase your risk of aspiration pneumonia.\nAre in the hospital or at a long-term care facility.\nSmoke.\nAre pregnant.\nHave a weakened immune system. You might have a weakened immune system if you’re on chemotherapy, are an organ transplant recipient, are living with HIV/AIDS or are taking medications that suppress your immune system.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "commonness",
+    "title": "How common is pneumonia?",
+    "body": "Anyone can get pneumonia. It’s a common illness, with millions of people diagnosed each year in the United States. About 55,000 people die each year of pneumonia in the U.S. It’s the most common cause of death in developing countries.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "treatments",
+    "title": "Available Treatments",
+    "body": "It is important to note that depending on the type of infection, treatment varies significantly.\n\nAs with many bacterial infections, antibiotics are the treatment of choice for bacterial pneumonia. For severe cases, hospitalization with oxygen and intravenous medications may be necessary.\nAntibiotics are not effective in the treatment of viral pneumonia. In some cases, antivirals may be prescribed. Treatment may focus simply on hydration, rest and medications to alleviate discomfort and symptoms.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "complications",
+    "title": "What are possible complications of pneumonia?",
+    "body": "Pneumonia can lead to serious complications that can require hospitalization, including:\n\nBreathing difficulties. Pneumonia can lead to respiratory failure or acute respiratory distress syndrome (ARDS).\nFluid around your lungs (pleural effusion).\nBacteria in your bloodstream (bacteremia), or sepsis. The bacteria that cause pneumonia can enter your bloodstream, spreading the infection to other organs and leading to sepsis or organ failure.\nLung abscess. Pneumonia can lead to pus-filled holes in your lungs.",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "prevention",
+    "title": "How can I prevent pneumonia?",
+    "body": "The best way to prevent pneumonia is to get vaccinated against bacteria and viruses that commonly cause it. There are also everyday precautions you can take to help reduce your risk of pneumonia like avoiding smoking and overexcessive alcohol consumption, washing hands consistently",
+    "image": "assets/images/..."
+  }
+]
