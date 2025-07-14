@@ -22,14 +22,18 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
             color: textcolor,
           ),
         ),
 
+        margin: EdgeInsets.all(20),
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 75),
+
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.blueGrey),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.blue),
           color: color,
         ),
       ),

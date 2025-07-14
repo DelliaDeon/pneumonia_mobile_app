@@ -1,11 +1,13 @@
-import 'package:final_year_p/pages/home_page.dart';
-import 'package:final_year_p/pages/settings_page.dart';
+import 'package:final_year_p/pages/nav_bar/home_page.dart';
+import 'package:final_year_p/pages/nav_bar/settings_page.dart';
 import 'package:final_year_p/pages/splash_screen.dart';
+import 'package:final_year_p/pages/nav_bar/storage_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import 'pages/info_page.dart';
+import 'pages/nav_bar/info_page.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,13 +21,6 @@ class FinalYearApp extends StatefulWidget {
   State<FinalYearApp> createState() => _FinalYearAppState();
 }
 
-List<Widget> _buildScreens(){
-  return [
-    HomePage(),
-    InfoPage(),
-    SettingsPage(),
-  ];
-}
 
 class _FinalYearAppState extends State<FinalYearApp> {
   @override
@@ -36,3 +31,4 @@ class _FinalYearAppState extends State<FinalYearApp> {
     );
   }
 }
+

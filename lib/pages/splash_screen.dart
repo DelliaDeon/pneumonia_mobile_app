@@ -1,71 +1,44 @@
-import 'package:final_year_p/pages/home_page.dart';
+import 'package:final_year_p/pages/nav_bar/home_page.dart';
+import 'package:final_year_p/pages/intro_screen.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 3));
+    _animation = Tween<double>(begin: 0.6, end: 3,).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+
+    _controller.repeat(reverse: true);
+    Future.delayed(Duration(seconds: 6), (){
+      Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => IntroScreen())
+      );
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Center(
-              child: Column(
-                children: [
-                  // logo
-
-                  // image
-                  Image.asset("lib/assets/images/1_image.jpeg"),
-
-                  // text
-                  Text(
-                    'Upload A Picture Of Your Chest X-ray '
-                    'To Detect The Presence or Absence of Pneumonia!',
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Arial',
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-
-                  // get started button
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePage()
-                        ),
-                      );
-                    },
-                    child: Container(
-                      child: Text(
-                      'Get Started',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(20),
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
-
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.blue.shade600,
-                    ),
-                  ),
-                )
-                ],
-              ),
-            ),
-          ),
-        )
+      backgroundColor: Colors.blueGrey.shade50,
+      body: Center(
+        child: ScaleTransition(
+          scale: _animation,
+          child: Image.asset("lib/assets/images/logo_w_text.png", width: 120,),
+        ),
       ),
     );
   }

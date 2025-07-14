@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -43,45 +44,77 @@ class _InfoPageState extends State<InfoPage> {
 
     // scroll to the section
     if (keyContent != null){
+      print("Scrolling to section: $id");
       Scrollable.ensureVisible(
         keyContent,
         duration: Duration(milliseconds: 600),
         curve: Curves.easeInOut,
       );
     }
+    else {
+      print("Section key context not found for: $id");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade50,
       appBar: AppBar(
-
+        backgroundColor: Colors.blueGrey.shade50,
+        foregroundColor: Colors.blue.shade800,
+        title: Center(child:Text(
+          'PNEUMONIA CHECKER',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.w500,
+          ),
+        ),),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: Image.asset('lib/assets/images/logo_w_text.png'),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 30,),
-                ListView.builder(
-                  itemCount: sections.length,
-                  itemBuilder: (context, index){
-                    final _section = sections[index];
-                    return Container(
-                      key: sectionKeys[index],
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () => scrollToSection(_section['id']),
-                            child: Text(_section['id'])
-                          ),
-                        ],
-                      ),
-                    );
-                  }
+                Text("Sections"),
+                SizedBox(height: 20,),
+
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: sections.length,
+                    itemBuilder: (context, index){
+                      final _section = sections[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                            WidgetsBinding.instance.addPostFrameCallback((_){
+                              scrollToSection(_section['id']);
+                            });
+                          },
+
+                          child: Text(
+                            _section['title'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.blue.shade800,
+                              decoration: TextDecoration.underline,
+                            ),
+                          )
+                        ),
+                      );
+                    }
+                  ),
                 )
 
               ],
@@ -92,25 +125,9 @@ class _InfoPageState extends State<InfoPage> {
 
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(20.0),
             child: Row(
               children: [
-                NavigationRail(
-                  destinations: sections.map(
-                      (s) => NavigationRailDestination(
-                        icon: Icon(Icons.arrow_right),
-                        label: Text(s['title']),
-                      )
-                  ).toList(),
-                  selectedIndex: _selectedIndex,
-                  onDestinationSelected: (index){
-                    scrollToSection(sections[index]['id']);
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
-                ),
-
                 Expanded(
                   child: ListView.builder(
                     controller: _scrollController,
@@ -125,7 +142,7 @@ class _InfoPageState extends State<InfoPage> {
                             Text(
                               section['title'],
                               style: TextStyle(
-                                fontSize: 24,
+                                fontSize: 28,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -133,6 +150,9 @@ class _InfoPageState extends State<InfoPage> {
 
                             Text(
                               section['body'],
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
                             ),
                             SizedBox(height: 20,),
                           ],
