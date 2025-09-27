@@ -1,5 +1,4 @@
 import 'package:final_year_p/components/custom_button.dart';
-import 'package:final_year_p/components/sign_in_up_text.dart';
 import 'package:final_year_p/pages/nav_bar/custom_navbar.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +54,8 @@ class _IntroScreenState extends State<IntroScreen> {
 
                     // description
                     Text(
-                      'Detect the presence or absence of pneumonia by simply '
+                      'Detect the presence or absence of viral or bacterial '
+                          'pneumonia by simply '
                           'uploading a picture of a chest x-ray.',
                       style: TextStyle(
                         color: Colors.grey.shade700,
@@ -79,14 +79,6 @@ class _IntroScreenState extends State<IntroScreen> {
                           ),
                         );
                       },
-                    ),
-                    SizedBox(height: 20,),
-
-
-                    // already have an account? sign in
-                    SignInUpText(
-                      startText: 'Already',
-                      endText: 'Sign in'
                     ),
                     SizedBox(height: 20,),
                   ],

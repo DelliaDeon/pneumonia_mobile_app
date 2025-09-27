@@ -1,11 +1,10 @@
 import 'package:final_year_p/pages/nav_bar/home_page.dart';
-import 'package:final_year_p/pages/nav_bar/settings_page.dart';
 import 'package:final_year_p/pages/splash_screen.dart';
-import 'package:final_year_p/pages/nav_bar/storage_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/nav_bar/info_page.dart';
 

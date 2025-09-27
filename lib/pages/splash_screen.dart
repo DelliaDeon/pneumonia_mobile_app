@@ -16,19 +16,24 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: Duration(seconds: 3));
-    _animation = Tween<double>(begin: 0.6, end: 3,).animate(
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _animation = Tween<double>(begin: 1.1, end: 2.8,).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
     _controller.repeat(reverse: true);
-    Future.delayed(Duration(seconds: 6), (){
+    Future.delayed(Duration(seconds: 8), (){
       Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => IntroScreen())
       );
     });
   }
 
+  @override
+  void dispose(){
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

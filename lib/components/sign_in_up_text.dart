@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class SignInUpText extends StatefulWidget {
   final String startText;
   final String endText;
+  Function()? onTap;
 
-  const SignInUpText({
+  SignInUpText({
     super.key,
     required this.startText,
-    required this.endText
+    required this.endText,
+    required this.onTap,
   });
 
   @override
@@ -30,12 +32,15 @@ class _SignInUpTextState extends State<SignInUpText> {
           ),
         ),
 
-        Text(
-          widget.endText,
-          style: TextStyle(
-            color: Colors.blue.shade900,
-              fontWeight: FontWeight.w500,
-              fontSize: 16
+        GestureDetector(
+          onTap: widget.onTap,
+          child: Text(
+            widget.endText,
+            style: TextStyle(
+              color: Colors.blue.shade900,
+                fontWeight: FontWeight.w500,
+                fontSize: 16
+            ),
           ),
         ),
       ],

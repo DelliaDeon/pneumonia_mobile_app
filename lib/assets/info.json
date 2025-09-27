@@ -42,7 +42,6 @@
     "image": "assets/images/..."
   },
 
-
   {
     "id": "telltale",
     "title": "How can I tell if I have pneumonia versus the common cold or the flu?",
@@ -89,6 +88,13 @@
     "id": "prevention",
     "title": "How can I prevent pneumonia?",
     "body": "The best way to prevent pneumonia is to get vaccinated against bacteria and viruses that commonly cause it. There are also everyday precautions you can take to help reduce your risk of pneumonia like avoiding smoking and overexcessive alcohol consumption, washing hands consistently",
+    "image": "assets/images/..."
+  },
+
+  {
+    "id": "disclaim",
+    "title": "Disclaimer",
+    "body": "This information is sourced from Cleveland Clinic. It is intended for educational purposes only and should not be used as a substitute for professional medical advice, diagnosis, or treatment. Please consult a qualified healthcare provider for proper medical guidance.",
     "image": "assets/images/..."
   }
 ]

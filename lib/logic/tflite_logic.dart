@@ -12,6 +12,7 @@ class OfflinePredService {
 
   final List<String> _labels = [
     'Bacterial Pneumonia',
+    'Non X-ray',
     'Normal',
     'Viral Pneumonia'
   ];
@@ -106,22 +107,27 @@ class OfflinePredService {
 
     // process the output
     List<double> probabilities = output[0].cast<double>();
-    double maxProbability = 0;
-    int predictedClassIndex = -1;
 
-    for (int i = 0; i < probabilities.length; i++){
-      if (probabilities[i] > maxProbability) {
-        maxProbability = probabilities[i];
-        predictedClassIndex = i;
-      }
-    }
+    // get highest probability
+    int predictedClassIndex = probabilities.indexOf(probabilities.reduce((a, b) => a > b ? a : b));
+    double maxProbability = probabilities[predictedClassIndex];
 
     if (predictedClassIndex != -1 && predictedClassIndex < _labels.length) {
       Map<String, dynamic> result = {};
 
+      // Top prediction
       result['prediction'] = _labels[predictedClassIndex];
       result['confidence'] = maxProbability;
-      result['gradcam'] = null;  // No gradcam for offliine prediction
+
+      // Add all class confidences
+      Map<String, double> allConfidences = {};
+      for (int i = 0; i < probabilities.length; i++) {
+        allConfidences[_labels[i]] = probabilities[i];
+      }
+      result['all_confidences'] = allConfidences;
+
+      // GradCAM not supported offline
+      result['gradcam'] = null;
 
       return result;
     }

@@ -28,6 +28,9 @@ class _OfflinePredictionPageState extends State<OfflinePredictionPage> {
   Uint8List? gradcamImage;
   bool loading = true;
   String? error;
+  Map<String, double>? allConfidences;
+  bool showConfidences = false;
+
 
   // instance of prediction service
   late OfflinePredService _offlinePredService;
@@ -60,6 +63,13 @@ class _OfflinePredictionPageState extends State<OfflinePredictionPage> {
           prediction = response['prediction'];
           confidence = response['confidence'];
 
+          if (response['all_confidences'] != null) {
+            allConfidences = Map<String, double>.from(
+              response['all_confidences']
+                  .map((k, v) => MapEntry(k, (v as num).toDouble())),
+            );
+          }
+
           if (gradcamImage != null){
             gradcamImage = base64Decode(response['gradcam'].split(',').last);
           }
@@ -91,68 +101,126 @@ class _OfflinePredictionPageState extends State<OfflinePredictionPage> {
     double originalWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: Colors.blue.shade100,
-      body: SingleChildScrollView(
-        child: Center(
-          child: loading
-              ? CircularProgressIndicator()
-              : error != null
-              ? Text("Error: $error")
-              :Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Center(
-                      child: Image.memory(
-                        widget.imageBytes, height: originalWidth * 0.3,
-                      )
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20,),
-
-
-                Text("Prediction: $prediction",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                  ),
-                ),
-                SizedBox(height: 12,),
-
-                Text(
-                  "Confidence: ${(confidence! * 100).toStringAsFixed(2)}%",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black12,
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(height: 30,),
-
-
-                Text("Go Online For Grad-CAM (Gradient-weighted Class Activation Mapping) Visualization. "
-                    "It helps to interpret and understand the decisions made by convolutional neural networks (CNNs)." ,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(height: 30,),
-
-                if (gradcamImage != null)
+      appBar: AppBar(
+        backgroundColor:  Theme.of(context).scaffoldBackgroundColor,
+      ),
+      backgroundColor: Colors.blueGrey.shade50,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: loading
+                ? CircularProgressIndicator()
+                : error != null
+                ? Text("Error: $error")
+                :Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   Column(
                     children: [
-                      Text('Grad-CAM'),
-                      Image.memory(gradcamImage!, height: 224,),
+                      SizedBox(height: 20,),
+
+                      Center(
+                        child: Image.memory(
+                          widget.imageBytes, height: 224,
+                        )
+                      ),
                     ],
                   ),
-              ],
+                  SizedBox(height: 20,),
+
+
+                  Text("Prediction: $prediction",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  SizedBox(height: 12,),
+        
+                  Text(
+                    "Confidence: ${(confidence! * 100).toStringAsFixed(2)}%",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey.shade800,
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+
+                  if (prediction == "Class 1" ||
+                      prediction == "Non X-ray") ...[
+                    const Icon(
+                      Icons.warning_amber_rounded,
+                      size: 60,
+                      color: Colors.redAccent,
+                    ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      "This image is not a chest X-ray.\n\nPlease upload a valid chest X-ray image for diagnosis.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent,
+                      ),
+                    ),
+                  ] else ...[
+                    if (allConfidences != null) ...[
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            showConfidences = !showConfidences;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.shade800,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                        child: Text(showConfidences ? "Hide Confidences" : "View All Confidences"),
+                      ),
+                      const SizedBox(height: 10),
+
+                      // Drop-down content
+                      if (showConfidences)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: allConfidences!.entries.map((entry) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                "${entry.key}: ${(entry.value * 100).toStringAsFixed(2)}%",
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      const SizedBox(height: 30), // Added const
+                    ],
+
+                    Text("Go Online For Grad-CAM (Gradient-weighted Class Activation Mapping) Visualization. "
+                      "It helps to interpret and understand the decisions made by the model." ,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+        
+                  if (gradcamImage != null)
+                    Column(
+                      children: [
+                        Text('Grad-CAM'),
+                        Image.memory(gradcamImage!, height: 224,),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
             ),
           ),
         ),

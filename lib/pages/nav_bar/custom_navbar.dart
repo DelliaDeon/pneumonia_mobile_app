@@ -1,9 +1,8 @@
 import 'package:final_year_p/pages/nav_bar/home_page.dart';
 import 'package:final_year_p/pages/nav_bar/info_page.dart';
-import 'package:final_year_p/pages/nav_bar/settings_page.dart';
-import 'package:final_year_p/pages/nav_bar/storage_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class CustomBottomNavbar extends StatefulWidget {
@@ -20,8 +19,6 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
     return [
       HomePage(),
       InfoPage(),
-      StoragePage(),
-      SettingsPage(),
     ];
   }
 
@@ -74,8 +71,6 @@ List<PersistentBottomNavBarItem> _navBarItems() {
           routes: {
             '/': (context) => HomePage(),
             '/info': (context) =>InfoPage(),
-            '/storage': (context) => StoragePage(),
-            'settings': (context) => SettingsPage(),
           }
       ),
     ),
@@ -97,59 +92,9 @@ List<PersistentBottomNavBarItem> _navBarItems() {
           routes: {
             '/': (context) => HomePage(),
             '/info': (context) =>InfoPage(),
-            '/storage': (context) => StoragePage(),
-            'settings': (context) => SettingsPage(),
           }
       ),
     ),
-
-    PersistentBottomNavBarItem(
-      icon: Icon(CupertinoIcons.timelapse),
-      title: 'History',
-      contentPadding: 5.0,
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-      ),
-      activeColorPrimary: Colors.blue.shade800,
-      activeColorSecondary: Colors.white,
-      inactiveColorPrimary: Colors.lightBlueAccent,
-      routeAndNavigatorSettings: RouteAndNavigatorSettings(
-          initialRoute: '/',
-          routes: {
-            '/': (context) => HomePage(),
-            '/info': (context) =>InfoPage(),
-            '/storage': (context) => StoragePage(),
-            'settings': (context) => SettingsPage(),
-          }
-      ),
-    ),
-
-
-    PersistentBottomNavBarItem(
-      icon: Icon(CupertinoIcons.profile_circled),
-      title: 'Profile',
-      contentPadding: 5.0,
-      textStyle: TextStyle(
-        color: Colors.white,
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-      ),
-      activeColorPrimary: Colors.blue.shade800,
-      activeColorSecondary: Colors.white,
-      inactiveColorPrimary: Colors.lightBlueAccent,
-      routeAndNavigatorSettings: RouteAndNavigatorSettings(
-          initialRoute: '/',
-          routes: {
-            '/': (context) => HomePage(),
-            '/info': (context) =>InfoPage(),
-            '/storage': (context) => StoragePage(),
-            'settings': (context) => SettingsPage(),
-          }
-      ),
-    ),
-
 
   ];
 }

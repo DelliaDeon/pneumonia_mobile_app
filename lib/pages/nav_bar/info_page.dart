@@ -12,7 +12,6 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
   List<dynamic> sections = [];
-  int _selectedIndex = 0;
   final Map<String, GlobalKey> sectionKeys = {};
   final ScrollController _scrollController = ScrollController();
 
@@ -31,15 +30,16 @@ class _InfoPageState extends State<InfoPage> {
     // assign sections and section keys
     setState(() {
       sections = jsonData;
+      sectionKeys.clear();
       for(var section in jsonData){
-        sectionKeys[section['id']] = GlobalKey();
+        sectionKeys[section["id"]] = GlobalKey();
+        print("Section keys populated: ${sectionKeys.keys}");
       }
     });
   }
 
   // function to scroll to specific sections
-  scrollToSection(String id){
-    // get content of key; section
+  void scrollToSection(String id){
     final keyContent = sectionKeys[id]?.currentContext;
 
     // scroll to the section
@@ -47,12 +47,38 @@ class _InfoPageState extends State<InfoPage> {
       print("Scrolling to section: $id");
       Scrollable.ensureVisible(
         keyContent,
-        duration: Duration(milliseconds: 600),
-        curve: Curves.easeInOut,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.fastOutSlowIn,
+        alignment: 0.0,
       );
     }
     else {
       print("Section key context not found for: $id");
+      print("Available keys: ${sectionKeys.keys}");
+      scrollToSectionByIndex(id);
+    }
+  }
+
+
+  // Alternative method using scroll controller directly
+  void scrollToSectionByIndex(String id) {
+    final index = sections.indexWhere((section) => section['id'] == id);
+    if (index != -1) {
+      // Estimate item height
+      double estimatedOffset = 0;
+      for (int i = 0; i < index; i++){
+        final section = sections[i];
+        final titleHeight = 90.0;
+        final bodyHeight = (section['body'].length);
+        final padding = 60.0;
+        estimatedOffset += titleHeight + bodyHeight + padding;
+      }
+
+      _scrollController.animateTo(
+        estimatedOffset,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.fastOutSlowIn,
+      );
     }
   }
 
@@ -78,6 +104,7 @@ class _InfoPageState extends State<InfoPage> {
         ],
       ),
       drawer: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -85,7 +112,12 @@ class _InfoPageState extends State<InfoPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 30,),
-                Text("Sections"),
+                Text("Sections", style: TextStyle(
+                  fontSize: 28,
+                  color: Colors.white,
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold,
+                ),),
                 SizedBox(height: 20,),
 
                 Expanded(
@@ -107,15 +139,15 @@ class _InfoPageState extends State<InfoPage> {
                             _section['title'],
                             style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: Colors.blue.shade800,
-                              decoration: TextDecoration.underline,
+                              color: Colors.white,
+                              fontSize: 18,
                             ),
                           )
                         ),
                       );
                     }
                   ),
-                )
+                ),
 
               ],
             ),
@@ -126,7 +158,9 @@ class _InfoPageState extends State<InfoPage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-            child: Row(
+            child: sections.isEmpty
+            ? Center(child: CircularProgressIndicator(),)
+            :Row(
               children: [
                 Expanded(
                   child: ListView.builder(
@@ -137,12 +171,15 @@ class _InfoPageState extends State<InfoPage> {
                       return Container(
                         key: sectionKeys[section['id']],
                         padding: EdgeInsets.all(20),
+                        margin: EdgeInsets.only(bottom: 20),
                         child: Column(
                           children: [
                             Text(
                               section['title'],
                               style: TextStyle(
                                 fontSize: 28,
+                                color: Colors.blue.shade900,
+                                decoration: TextDecoration.underline,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

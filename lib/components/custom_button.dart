@@ -28,7 +28,7 @@ class CustomButton extends StatelessWidget {
           ),
         ),
 
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.all(15),
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 75),
 
         decoration: BoxDecoration(
