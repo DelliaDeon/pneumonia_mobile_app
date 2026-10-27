@@ -102,4 +102,4 @@ Using `--host 0.0.0.0` lets a physical phone on the same network reach the serve
 - Save prediction history and export reports
 
 ## Author
-**Fidelia Nwawulu** · [LinkedIn](https://linkedin.com/in/fidelia-nwawulu) · [GitHub](https://github.com/DelliaDeon)
+**Fidelia Nwawulu** 
